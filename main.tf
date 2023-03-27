@@ -35,7 +35,17 @@ module "eks" {
   aws_eks_subnet_ids              = [
                                       module.aws_networking.aws_subnet_id,
                                       module.aws_networking.aws_subnet_id2,
+                                      module.aws_networking.aws_subnet_id3,
+                                      module.aws_networking.aws_subnet_id4,
                                     ]  
+  node_group_name                 = "eks_nodes"
+  private_subnet_ids              = [
+                                      module.aws_networking.aws_subnet_id3,
+                                      module.aws_networking.aws_subnet_id4,
+                                    ]
+  workers_desired_size            = 1
+  workers_max_size                = 3
+  workers_min_size                = 1
   depends_on = [
     module.rds
   ]
