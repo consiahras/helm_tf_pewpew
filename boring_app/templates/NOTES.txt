@@ -1,0 +1,14 @@
+Welcome to Helm deployment. 
+
+Your release name should be {{ .Release.Name }} 
+
+Your chart name is {{ .Chart.Name }}-{{ .Chart.Version }}
+
+To learn more information run:
+helm status {{ .Release.Name }}
+
+
+To port forward for reaching nginx run the command:
+kubectl port-forward nginx-pod-boring-app 8080:80
+
+

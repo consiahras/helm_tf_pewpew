@@ -1,0 +1,25 @@
+# .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars configuration files
+*.tfvars
+*.tfvars.*
+
+# .out files from plans
+*.out
+
+# .DS_Store files on macOS
+.DS_Store
+
+# .vscode files
+.vscode/
+
+#terraform lock
+.terraform.lock.hcl
+
+#plans
+*.tfplan

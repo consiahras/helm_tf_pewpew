@@ -1,0 +1,13 @@
+type: Namespace
+name: boring-app
+labels:
+  name: boring-app 
+kind: Pod
+podname: nginx-pod-boring-app
+containername: nginx-boring-app
+nginximage:  "nginx:1.23.3"
+configname: nginx-configmap
+volume:
+  path: /usr/share/nginx/html
+  pathname: nginx-path
+  configname: nginx-configmap
