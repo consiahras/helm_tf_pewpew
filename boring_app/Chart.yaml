@@ -1,5 +1,0 @@
-apiVersion: v2
-name: helm-chart-deployment
-description: A helm chart for K8S deployment
-type: application
-version: 0.0.1

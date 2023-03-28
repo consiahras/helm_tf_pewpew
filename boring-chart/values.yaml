@@ -1,0 +1,17 @@
+image:
+  repository:
+  tag: latest
+  pullPolicy: Always
+
+service:
+  name: boring-service
+  type: LoadBalancer
+  port: 80
+
+mysql:
+  enabled: false
+  host: localhost
+  port: 3306
+  user: boring
+  password: boring
+  database:

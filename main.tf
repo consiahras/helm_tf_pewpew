@@ -14,14 +14,14 @@ module "aws_networking" {
 
 module "ecr" {
   source  = "./modules/ecr"
-  aws_ecr_repository_name         = "boring_ecr"
+  aws_ecr_repository_name         = "boring_app"
 }
 
 module "rds" {
   source = "./modules/rds" 
   aws_subnet_id                   = "${module.aws_networking.aws_subnet_id}"
   vpc_security_group_ids          = [ "${module.aws_networking.aws_security_group_id}" ]
-  aws_db_name                     = "boring_app_db"
+  aws_db_name                     = "client_ip"
   rds_username                    = "admin"
   rds_password                    = var.rds_password
   depends_on = [
@@ -51,6 +51,17 @@ module "eks" {
   ]
 }
 
+module "helm-boring-app" {
+  count = var.enable_helm_module
+  source = "./modules/helm"
+  container_image_url             = "${module.ecr.aws_ecr_url}"
+  mysql_host                      = "${module.rds.db_address}"
+  mysql_user                      = "${module.rds.db_uid}"
+  mysql_password                  = "${module.rds.db_password}"
+  mysql_database                  = "${module.rds.db_name}"
+  
+  depends_on = [ module.rds, module.eks ]
+}
 
 #module "nginx-controller" {
 #  source  = "terraform-iaac/nginx-controller/helm"

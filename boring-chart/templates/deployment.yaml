@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  labels:
+    app: boring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: boring
+  template:
+    metadata:
+      labels:
+        app: boring
+    spec:
+      containers:
+        - name: boring
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+          env:
+            - name: MYSQL_HOST
+              value: "{{ .Values.mysql.host }}"
+            - name: MYSQL_PORT
+              value: "{{ .Values.mysql.port }}"
+            - name: MYSQL_USER
+              value: "{{ .Values.mysql.user }}"
+            - name: MYSQL_PASSWORD
+              value: "{{ .Values.mysql.password }}"
+            - name: MYSQL_DATABASE
+              value: "{{ .Values.mysql.database }}"
